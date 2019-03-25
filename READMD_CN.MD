@@ -21,18 +21,18 @@ go-tagexpr 允许Gopher们在 struct tag 写表达式代码，并通过高性能
 
 安装
 
-go get -u github.com/bytedance/go-tagexpr
+   go get -u github.com/bytedance/go-tagexpr
 下面使用一个小示例，演示含有枚举、比较、字段关联的较复杂场景。
 
 示例代码
 
-import (
-	"fmt"
+   import (
+	 "fmt"
 
-	tagexpr "github.com/bytedance/go-tagexpr"
-)
+	 tagexpr "github.com/bytedance/go-tagexpr"
+   )
 
-func ExampleTagexpr() {
+   func ExampleTagexpr() {
 	vm := tagexpr.New("te")
 	type Meteorology struct {
 		Season      string `te:"$=='spring'||$=='summer'||$=='autumn'||$=='winter'"`
@@ -54,7 +54,7 @@ func ExampleTagexpr() {
 	// false
 	// false
 	// Uncomfortable temperature: 40
-}
+ }
 代码诠释：
 
 新建一个标签名称为 te 的解释器
@@ -62,16 +62,16 @@ func ExampleTagexpr() {
 vm := tagexpr.New("te")
 定义一个结构体，添加标签表达式，并实例化一个 m 对象。其中 $ 表示当前字段值，(Season)$ 表示 Season 字段的值
 
-type Meteorology struct {
+ type Meteorology struct {
     Season      string `te:"$=='spring'||$=='summer'||$=='autumn'||$=='winter'"`
     Weather     string `te:"$!='snowing' || (Season)$=='winter'"`
     Temperature int    `te:"{range:$>=-10 && $<38}{alarm:sprintf('Uncomfortable temperature: %v',$)}"`
-}
-m := &Meteorology{
+ }
+ m := &Meteorology{
     Season:      "summer",
     Weather:     "snowing",
     Temperature: 40,
-}
+ }
 将对象实例 m 放入解释器中运行，返回表达式对象 r
 
 r := vm.MustRun(m)
