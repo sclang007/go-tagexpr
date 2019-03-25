@@ -187,3 +187,5 @@ func RegValidateFunc(funcName string, fn func(args ...interface{}) bool, force .
 RegValidateFunc的force可选参数，表示是否强制覆盖已经注册了的同名函数。
 
 **结论：**validator的使用方法非常简单、灵活且具有良好的扩展性，能够轻松满足各种复杂的验证场景。
+
+https://my.oschina.net/henrylee2cn/blog/3027297#0-sqq-1-44563-9737f6f9e09dfaf5d3fd14d775bfee85
